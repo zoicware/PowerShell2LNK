@@ -27,10 +27,14 @@ if ($Help) {
 }
 
 #check output dir if not use scriptroot
-if (!(test-path $outputDir -ErrorAction SilentlyContinue)) {
+if ($null -ne $outputDir) {
+    if (!(test-path $outputDir -ErrorAction SilentlyContinue)) {
+        $outputDir = $PSScriptRoot
+    }
+}
+else {
     $outputDir = $PSScriptRoot
 }
-
 
 #get ps version bin
 $PSPath = $null
